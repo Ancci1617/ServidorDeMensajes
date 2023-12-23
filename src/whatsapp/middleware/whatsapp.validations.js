@@ -15,19 +15,16 @@ const whatsappValidations = (req, res, next) => {
         return res.json({
             reply: `
 👨🏻‍💻 Estimado cliente: 
-Le informamos que durante el *24/12/2023  al 03/01/2024* nuestro equipo se tomará vacaciones.
-            
-💡 *No* estaremos brindando *ninguno de nuestros servicios* por ese periodo.
-            
-⚠️ Le recordamos que *no debe abonar a extraños durante esos días,* caso contrario *su pago no será reconocido.*
-            
-🎄*_BGM HOGAR les desea: feliz Navidad y un próspero año nuevo._* 🎉🥂 
-            
-🤍 ¡Gracias por elegirnos! 💫
-            
-📲 Se encuentra *HABILITADO* el pago via *TRANSFERENCIA* 📲
-            
-Para consultar su deuda ingrese 'mi dni es' seguido de su numero de documento
+
+💡Le informamos que durante el *24/12/2023  al 03/01/2024* el equipo de *BGM HOGAR* se tomará vacaciones. *Todos nuestros servicios estarán suspendidos durante ese período.*
+
+🚨*IMPORTANTE*🚨
+
+📲 Se encuentra *HABILITADO* el pago vía *TRANSFERENCIA*💰
+
+🤳🏼*Para eso, envíanos tu N° DNI para que puedas abonar tus cuotas,* de esa manera podremos brindarte:
+• Saldo deuda.
+• Alias para transferir.
         `})
     }
 

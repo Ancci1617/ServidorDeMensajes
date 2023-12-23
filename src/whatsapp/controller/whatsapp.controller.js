@@ -58,14 +58,16 @@ const getClientDebt = async (req, res) => {
             return acum
         },
             `
-💡El *ALIAS* correspondiente es el siguiente: 👇🏼
+💡Hola *${CTE_DATA.NOMBRE}* el *alias* correspondiente es el siguiente: 👇🏼
 *${CTE_DATA.ALIAS}*
         
 💳 El total a abonar es: *$${totales.cuota + totales.mora + totales.servicio}* 
 • $${totales.cuota} (cuota)
 • $${totales.servicio} (servicio)
 • $${totales.mora} (mora)
-        `)
+        
+Correspondiente a los siguientes créditos:
+`)
 
 
 
