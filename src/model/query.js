@@ -25,6 +25,7 @@ const getClientes = async (cte) => {
         ClientesSV.CRUCES2,
         (SELECT BaseCTE.TELEFONO FROM BaseCTE WHERE cte = ? AND ID = (SELECT MAX(ID) from BaseCTE where CTE = ?)) AS WHATSAPP,
         ClientesSV.DNI,
+        ClientesSV.ALIAS,
         MasterResumen.CALIF AS MASTER,
         NULL AS OBS
     FROM

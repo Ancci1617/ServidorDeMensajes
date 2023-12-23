@@ -14,9 +14,20 @@ const whatsappValidations = (req, res, next) => {
 
         return res.json({
             reply: `
-            Actualmente no nos encontramos trabajando, 
-            en caso que quieras abonar tu cuota debes enviarnos en un mensaje: 
-            'Mi dni es ' seguido de tu numero de dni, sin puntos ni espacios
+👨🏻‍💻 Estimado cliente: 
+Le informamos que durante el *24/12/2023  al 03/01/2024* nuestro equipo se tomará vacaciones.
+            
+💡 *No* estaremos brindando *ninguno de nuestros servicios* por ese periodo.
+            
+⚠️ Le recordamos que *no debe abonar a extraños durante esos días,* caso contrario *su pago no será reconocido.*
+            
+🎄*_BGM HOGAR les desea: feliz Navidad y un próspero año nuevo._* 🎉🥂 
+            
+🤍 ¡Gracias por elegirnos! 💫
+            
+📲 Se encuentra *HABILITADO* el pago via *TRANSFERENCIA* 📲
+            
+Para consultar su deuda ingrese 'mi dni es' seguido de su numero de documento
         `})
     }
 

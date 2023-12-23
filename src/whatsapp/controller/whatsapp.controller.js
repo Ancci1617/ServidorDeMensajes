@@ -6,9 +6,11 @@ const getClientDebt = async (req, res) => {
     const { sender, message, phone } = req.body;
 
     try {
-        
+
         const dni = message.match("\\d+")[0];
-        console.log("dni",dni)
+
+        console.log("desde",phone,"dni", dni);
+
         if (!dni) return res.status(400).json({ reply: "No se encontro un numero de DNI Valido" })
 
         const { CTE } = await getCteDni(dni)
@@ -29,23 +31,51 @@ const getClientDebt = async (req, res) => {
             data: ficha, deuda: ficha.FICHA < 50000 ? getDoubt(ficha) : getDebtEasy(ficha)
         }));
 
-
+        fichas_data.forEach(ficha =>
+            ficha.deuda.cuota = Math.max(Math.min(ficha.data.CUOTA, parseInt(ficha.data.SALDO)), ficha.deuda.cuota)
+        );
         const totales = fichas_data.reduce((acumm, ficha) => ({
-            cuota: acumm.cuota + Math.max(Math.min(ficha.data.CUOTA, parseInt(ficha.data.SALDO)), ficha.deuda.cuota),
+            cuota: acumm.cuota + ficha.deuda.cuota,
             servicio: acumm.servicio + ficha.deuda.servicio,
             mora: acumm.mora + ficha.deuda.mora
         }), { cuota: 0, servicio: 0, mora: 0 })
 
 
-        // console.log("totales", totales)
+
+
+
+
+        let detail_string = fichas_data.reduce((acum, ficha) => {
+            const { cuota, mora, servicio } = ficha.deuda
+            const { FICHA } = ficha.data
+
+            acum = acum + "\n" +
+                "*" + (FICHA > 50000 ? "💰" : "📝") + FICHA + "*\n" +
+                "• $" + cuota + "(cuota)" + "\n" +
+                (servicio ? "• $" + servicio + "(servicio)" + "\n" : "") +
+                (mora ? "• $" + mora + "(mora)" + "\n" : "")
+
+            return acum
+        },
+            `
+💡El *ALIAS* correspondiente es el siguiente: 👇🏼
+*${CTE_DATA.ALIAS}*
+        
+💳 El total a abonar es: *$${totales.cuota + totales.mora + totales.servicio}* 
+• $${totales.cuota} (cuota)
+• $${totales.servicio} (servicio)
+• $${totales.mora} (mora)
+        `)
+
+
+
+
+
+
 
         return res.status(200).json({
-            reply:
-                `${CTE_DATA.NOMBRE} el alias correspondiente es el siguiente:  
-                El total a abonar es: $40.000 pertenecientes a la ficha 9588 y 7593
-                -$*${totales.cuota}* (cuota)
-                -$*${totales.servicio}* (servicio)
-                -$*${totales.mora}* (mora)`
+            reply: detail_string
+
         });
 
 
